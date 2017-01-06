@@ -40,6 +40,8 @@ filetype plugin indent on
 set t_Co=256
 
 colorscheme solarized
+set background=dark
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append
