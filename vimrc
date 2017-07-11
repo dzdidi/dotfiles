@@ -7,7 +7,6 @@ call vundle#begin()
     Plugin 'scrooloose/syntastic'
     Plugin 'Raimondi/delimitMate'
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'kchmck/vim-coffee-script'
     Plugin 'Yggdroot/indentLine'
 call vundle#end()
 
@@ -22,7 +21,8 @@ set expandtab
 set list
 lcs=eol:¶,tab:»»,trail:·,extends:>,precedes:<
 
-set nu!
+" Adjust view for navigation
+set number
 set relativenumber
 set cursorline
 
@@ -35,18 +35,22 @@ set hlsearch
 " Syntax
 syntax on
 
+" Status line
+set showcmd
+set laststatus=2
+
 filetype plugin indent on
 
+" Set colors and theme
 set t_Co=256
-
 colorscheme solarized
 set background=dark
 
+" Proper tab spliting
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 set splitbelow
 set splitright
 
