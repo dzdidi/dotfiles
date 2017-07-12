@@ -8,6 +8,8 @@ call vundle#begin()
     Plugin 'Raimondi/delimitMate'
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'Yggdroot/indentLine'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'nerdtree'
 call vundle#end()
 
 " show existing tab with 4 spaces width
@@ -44,7 +46,7 @@ filetype plugin indent on
 " Set colors and theme
 set t_Co=256
 colorscheme solarized
-set background=dark
+set background=light
 
 " Proper tab spliting
 nnoremap <C-J> <C-W><C-J>
@@ -53,6 +55,15 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
+
+" NerdTree start up and shut down
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Map it
+map <C-n> :NERDTreeToggle<CR>
+" show hidden files
+let NERDTreeShowHidden=1 "Can be done by <Shift+I>
 
 " Brief help
 " :PluginList       - lists configured plugins
