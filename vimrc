@@ -31,8 +31,10 @@ lcs=eol:¶,tab:»»,trail:·,extends:>,precedes:<
 
 " Adjust view for navigation
 set number
+set ruler
 set relativenumber
 set cursorline
+set cursorcolumn
 
 " Fancy search adjustments
 set ignorecase
