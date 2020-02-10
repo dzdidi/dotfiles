@@ -95,6 +95,7 @@ filetype plugin indent on
 " command line completion
 set wildmenu
 set wildmode=list:longest,full
+set display-=msgsep
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
