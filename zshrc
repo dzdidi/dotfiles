@@ -2,11 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/dzdidi/.oh-my-zsh
+export ZSH=
 
 # Language and encoding
 export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-
+export LANG=en_US.UTF-8
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -96,3 +96,29 @@ alias vimconfig="nvim ~/.nvimrc"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Yubikey for gpg keys
+# eval $(gpg-agent --daemon)
+# GPG_TTY=$(tty)
+# export GPG_TTY
+# if [ -f "${HOME}/.gpg-agent-info" ]; then
+#    . "${HOME}/.gpg-agent-info"
+#    export GPG_AGENT_INFO
+#    export SSH_AUTH_SOCK
+#fi
+
+#export GPG_TTY=$(tty)
+#export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
+#
+#if ! pgrep -u $LOGNAME gpg-agent &>/dev/null;then
+#    eval $(gpg-agent --daemon --options ~/.gnupg/gpg-agent.conf)
+#fi
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+# vi mode
+#bindkey -v
+#export KEYTIMEOUT=1
+
+
+# syntax highlight
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
