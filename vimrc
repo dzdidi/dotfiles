@@ -1,29 +1,36 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate (same to remove unlisted)
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" see :h vundle for more details or wiki for FAQ
-call vundle#begin()
-    Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'leafgarland/typescript-vim'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'Raimondi/delimitMate'
-    Plugin 'VundleVim/Vundle.vim'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'ekalinin/Dockerfile.vim'
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'othree/yajs.vim'
-    Plugin 'ericpruitt/tmux.vim', {'rtp': 'vim/'}
-    Plugin 'fatih/vim-go'
-    Plugin 'iCyMind/NeoSolarized'
-    Plugin 'romainl/flattened'
-    Plugin 'vim-airline/vim-airline'
-call vundle#end()
+" PlugInstall [name ...] [#threads]	Install plugins
+" PlugUpdate [name ...] [#threads]	Install or update plugins
+" PlugClean[!]	Remove unlisted plugins (bang version will clean without prompt)
+" PlugUpgrade	Upgrade vim-plug itself
+" PlugStatus	Check the status of plugins
+" PlugDiff	Examine changes from the previous update and the pending changes
+" PlugSnapshot[!] [output path]	Generate script for restoring the current snapshot of the plugins
+
+call plug#begin()
+    Plug 'jelera/vim-javascript-syntax'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'Quramy/tsuquyomi'
+    Plug 'scrooloose/syntastic'
+    Plug 'tpope/vim-fugitive'
+    Plug 'Raimondi/delimitMate'
+    Plug 'VundleVim/Vundle.vim'
+    Plug 'scrooloose/nerdtree'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'Yggdroot/indentLine'
+    Plug 'othree/yajs.vim'
+    Plug 'ericpruitt/tmux.vim', {'rtp': 'vim/'}
+    Plug 'fatih/vim-go'
+    Plug 'iCyMind/NeoSolarized'
+    Plug 'romainl/flattened'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'tomlion/vim-solidity'
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'micha/vim-colors-solarized'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
 
 " convert tabs to spaces
 set expandtab
@@ -34,10 +41,11 @@ set shiftwidth=2
 set smarttab
 set et
 
-
 " always set autoindenting on
-set autoindent
 set smartindent
+
+" auto reload file on change
+set autoread
 
 " folding options
 set foldmethod=indent
@@ -54,9 +62,9 @@ set relativenumber
 " Highlightning
 set cursorline
 set cursorcolumn
-set colorcolumn=80
+set colorcolumn=81
 :highlight ColorColumn ctermbg=lightblue guibg=lightblue
-
+"
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -96,8 +104,8 @@ filetype plugin indent on
 set wildmenu
 set wildmode=list:longest,full
 set display-=msgsep
+
 set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
@@ -108,16 +116,16 @@ set wildignore+=*.luac                           " Lua byte code
 set wildignore+=*.pyc                            " Python byte code
 
 " When vimrc is edited, reload it
-"autocmd! bufwritepost nvimrc source ~/.nvimrc
+autocmd! bufwritepost nvimrc source ~/.nvimrc
 
 " Set colors and theme
-colorscheme NeoSolarized
+"colorscheme NeoSolarized
+colorscheme solarized
 set background=dark
 let g:solarized_termcolors=16
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 "set t_Co=256
-"colorscheme solarized
 
 " Nonrmal mapping
 nnoremap <C-J> <C-W><C-J>
@@ -127,6 +135,8 @@ nnoremap <C-H> <C-W><C-H>
 " Proper tab spliting
 set splitbelow
 set splitright
+" 
+nnoremap <C-W><C-F> <C-W>vgf
 
 " Terminal mapping
 ":tnoremap <Esc> <C-\><C-n>
@@ -156,3 +166,17 @@ set spell
 
 " Ctags
 set tags=tags
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+autocmd FileType typescript :set makeprg=tsc
