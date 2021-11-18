@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=
+export ZSH=~/.oh-my-zsh
 
 # Language and encoding
 export LC_ALL=en_US.UTF-8
@@ -89,7 +89,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim='nvim'
+alias vim='nvim -O'
 alias zshconfig="nvim ~/.zshrc"
 alias vimconfig="nvim ~/.nvimrc"
 
@@ -97,28 +97,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Yubikey for gpg keys
-# eval $(gpg-agent --daemon)
-# GPG_TTY=$(tty)
-# export GPG_TTY
-# if [ -f "${HOME}/.gpg-agent-info" ]; then
-#    . "${HOME}/.gpg-agent-info"
-#    export GPG_AGENT_INFO
-#    export SSH_AUTH_SOCK
-#fi
-
-#export GPG_TTY=$(tty)
-#export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
-#
-#if ! pgrep -u $LOGNAME gpg-agent &>/dev/null;then
-#    eval $(gpg-agent --daemon --options ~/.gnupg/gpg-agent.conf)
-#fi
-#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
-# vi mode
-#bindkey -v
-#export KEYTIMEOUT=1
-
 
 # syntax highlight
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(pyenv init -)"
+
+bindkey \\C-R history-incremental-pattern-search-backward
+
+
