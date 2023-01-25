@@ -104,4 +104,18 @@ eval "$(pyenv init -)"
 
 bindkey \\C-R history-incremental-pattern-search-backward
 
+# auto-read readme.md
+rmd () {
+  if [ -e "./readme.md" ] ; then
+    markdown "./readme.md" | lynx -stdin
+  else
+    return 1
+  fi
+}
 
+# probably annoying hook for inspecting repos
+autoload -U add-zsh-hook
+inspect_after_cd() {
+  rmd && tree || ls -latr
+}
+add-zsh-hook chpwd inspect_after_cd
