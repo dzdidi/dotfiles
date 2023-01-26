@@ -58,7 +58,7 @@ export HISTCONTROL=ignoredups
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-vi-mode tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -92,10 +92,13 @@ source $ZSH/oh-my-zsh.sh
 alias vim='nvim -O'
 alias zshconfig="nvim ~/.zshrc"
 alias vimconfig="nvim ~/.nvimrc"
+alias tmuxconfig="nvim ~/.tmux.conf"
+alias vimdiff="nvim -d"
+alias tree="tree -d -I 'node_modules|dist|cache'"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
 # syntax highlight
@@ -104,18 +107,13 @@ eval "$(pyenv init -)"
 
 bindkey \\C-R history-incremental-pattern-search-backward
 
-# auto-read readme.md
+# read md
 rmd () {
   if [ -e "./readme.md" ] ; then
-    markdown "./readme.md" | lynx -stdin
+    pandoc "./readme.md" -f markdown -t html | lynx -stdin -vikeys
   else
     return 1
   fi
 }
 
-# probably annoying hook for inspecting repos
-autoload -U add-zsh-hook
-inspect_after_cd() {
-  rmd && tree || ls -latr
-}
-add-zsh-hook chpwd inspect_after_cd
+if [ "$TMUX" = "" ]; then tmux; fi
